@@ -3,7 +3,7 @@
 set -ex
 
 # Generate dash.conf
-dash_init
+pivx_init
 
 if [ $# -gt 0 ]; then
     args=("$@")
@@ -11,4 +11,4 @@ else
     args=("-rpcallowip=::/0")
 fi
 
-exec dashd "${args[@]}"
+exec pivxd "${args[@]}"
