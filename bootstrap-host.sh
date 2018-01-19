@@ -4,7 +4,7 @@
 #
 set -ex
 
-DASH_IMAGE=${DASH_IMAGE:-dashpay/dashd}
+DASH_IMAGE=${DASH_IMAGE:-yannik95/pivxd}
 
 distro=$1
 shift
@@ -45,12 +45,8 @@ if [ -z "${DASH_IMAGE##*/*}" ]; then
 fi
 
 # Initialize the data container
-docker volume create --name=dashd-data
-docker run -v dashd-data:/dash --rm $DASH_IMAGE dash_init
-
-# Start dashd via upstart and docker
-curl https://raw.githubusercontent.com/dashpay/docker-dashd/master/upstart.init > /etc/init/docker-dashd.conf
-start docker-dashd
+docker volume create --name=pivxd-data
+docker run -v pivxd-data:/pivxd --rm $DASH_IMAGE pivx_init
 
 set +ex
 echo "Resulting dash.conf:"
