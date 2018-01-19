@@ -1,12 +1,9 @@
-Dashd for Docker
+Pivxd for Docker
 ================
 
-[![Docker Stats](http://dockeri.co/image/dashpay/dashd)](https://hub.docker.com/r/dashpay/dashd/)
+[![Docker Stats](http://dockeri.co/image/yannik95/pivxd)](https://hub.docker.com/r/yannik95/pivxd/)
 
-[![Build Status](https://travis-ci.org/dashpay/docker-dashd.svg?branch=master)](https://travis-ci.org/dashpay/docker-dashd/)
-
-
-Docker image that runs the Dash dashd node in a container for easy deployment.
+Docker image that runs the Pivx pivxd node in a container for easy deployment.
 
 
 Requirements
@@ -24,21 +21,21 @@ Really Fast Quick Start
 
 One liner for Ubuntu 14.04 LTS machines with JSON-RPC enabled on localhost and adds upstart init script:
 
-    curl https://raw.githubusercontent.com/dashpay/docker-dashd/master/bootstrap-host.sh | sh -s trusty
+    curl https://raw.githubusercontent.com/yannik995/docker-pivxd/master/bootstrap-host.sh | sh -s trusty
 
 
 Quick Start
 -----------
 
-1. Create a `dashd-data` volume to persist the dashd blockchain data, should exit immediately.  The `dashd-data` container will store the blockchain when the node container is recreated (software upgrade, reboot, etc):
+1. Create a `pivxd-data` volume to persist the pivxd blockchain data, should exit immediately.  The `pivx-data` container will store the blockchain when the node container is recreated (software upgrade, reboot, etc):
 
-        docker volume create --name=dashd-data
-        docker run -v dashd-data:/dash --name=dashd-node -d \
-            -p 9999:9999 \
-            -p 127.0.0.1:9998:9998 \
-            dashpay/dashd
+        docker volume create --name=pivx-data
+        docker run -v pivx-data:/pivx --name=pivxd-node -d \
+            -p 51472:51472 \
+            -p 127.0.0.1:51473:51473 \
+            yannik95/pivxd
 
-2. Verify that the container is running and dashd node is downloading the blockchain
+2. Verify that the container is running and pivxd node is downloading the blockchain
 
         $ docker ps
         CONTAINER ID        IMAGE                         COMMAND             CREATED             STATUS              PORTS                                              NAMES
@@ -46,7 +43,7 @@ Quick Start
 
 3. You can then access the daemon's output thanks to the [docker logs command]( https://docs.docker.com/reference/commandline/cli/#logs)
 
-        docker logs -f dashd-node
+        docker logs -f pivxd-node
 
 4. Install optional init scripts for upstart and systemd are in the `init` directory.
 
@@ -56,11 +53,11 @@ Documentation
 
 * To run in testnet, add environment variable `TESTNET=1` to `docker run` as such:
 
-        docker run -v dashd-data:/dash --name=dashd-node -d \
+        docker run -v pivx-data:/pivx --name=pivxd-node -d \
             --env TESTNET=1 \
-            -p 9999:9999 \
-            -p 127.0.0.1:9998:9998 \
-            dashpay/dashd
+            -p 51474:51474 \
+            -p 127.0.0.1:51475:51475 \
+            yannik95/pivxd
 
 * Additional documentation in the [docs folder](docs).
 
@@ -68,5 +65,6 @@ Credits
 -------
 
 Original work by Kyle Manna [https://github.com/kylemanna/docker-bitcoind](https://github.com/kylemanna/docker-bitcoind).
-Modified to use Dash Core instead of Bitcoin Core.
+Modified by Holger Schinzel to use Dash Core instead of Bitcoin Core.
+Modified to use Pivx Core instead of Bitcoin Core.
 
