@@ -9,7 +9,7 @@ ENV HOME /pivx
 ENV USER_ID ${USER_ID:-1000}
 ENV GROUP_ID ${GROUP_ID:-1000}
 RUN groupadd -g ${GROUP_ID} pivx
-RUN useradd -u ${USER_ID} -g pivx -s /bin/bash -m -d /dash pivx
+RUN useradd -u ${USER_ID} -g pivx -s /bin/bash -m -d ${HOME} pivx
 
 RUN chown pivx:pivx -R /pivx
 
