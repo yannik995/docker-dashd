@@ -4,22 +4,22 @@ set -ex
 
 # This shouldn't be in the Dockerfile or containers built from the same image
 # will have the same credentials.
-if [ ! -e "$HOME/.dashcore/dash.conf" ]; then
-    mkdir -p $HOME/.dashcore
+if [ ! -e "$HOME/.pivx/dash.conf" ]; then
+    mkdir -p $HOME/.pivx
 
-    echo "Creating dash.conf"
+    echo "Creating pivx.conf"
 
     # Seed a random password for JSON RPC server
-    cat <<EOF > $HOME/.dashcore/dash.conf
+    cat <<EOF > $HOME/.pivx/pivx.conf
 testnet=${TESTNET:-0}
 disablewallet=${DISABLEWALLET:-1}
 printtoconsole=${PRINTTOCONSOLE:-1}
-rpcuser=${RPCUSER:-dashrpc}
+rpcuser=${RPCUSER:-pivxrpc}
 rpcpassword=${RPCPASSWORD:-`dd if=/dev/urandom bs=33 count=1 2>/dev/null | base64`}
 EOF
 
 fi
 
-cat $HOME/.dashcore/dash.conf
+cat $HOME/.pivx/pivx.conf
 
 echo "Initialization completed successfully"
